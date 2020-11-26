@@ -5,6 +5,7 @@ const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [recapPassword, setRecapPassword] = useState('');
+  const [error, setError] = useState(null);
   const [newAccount, setNewAccount] = useState(true);
 
   const onChange = (event) => {
@@ -17,6 +18,8 @@ const Auth = () => {
       setRecapPassword(value);
     }
   }
+
+  const toggleAccount = () => setNewAccount((prev) => !prev);
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -31,6 +34,7 @@ const Auth = () => {
       console.log('data', data);
     } catch (error) {
       console.log('error', error);
+      setError(error.message);
     }
   }
 
@@ -60,8 +64,10 @@ const Auth = () => {
             value={recapPassword}
             onChange={onChange} />
         }
+        { error }
         <input type="submit" value={newAccount ? '유저 생성하기' : '로그인'} />
       </form>
+      <span onClick={toggleAccount}>{newAccount ? '로그인' : '유저 생성하기' }</span>
       <div>
         <button>구글로 계속하기</button>
         <button>깃허브로 계속하기</button>
