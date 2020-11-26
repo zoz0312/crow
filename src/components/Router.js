@@ -13,10 +13,15 @@ const AppRouter = ({ isLoggedIn, userObject, refreshUser }) => {
         {isLoggedIn ?
           <>
             <Route exact path="/">
-              <Home userObject={userObject} />
+              <Home
+                userObject={userObject}
+              />
             </Route>
             <Route exact path="/profile">
-              <Profile userObject={userObject} refreshUser={refreshUser} />
+              <Profile
+                userObject={userObject}
+                refreshUser={refreshUser}
+              />
             </Route>
             <Redirect from="*" to="/" />
           </>
