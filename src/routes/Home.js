@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
+import { dbService } from 'firebaseSetup';
+import { COLLECTION } from '../constants';
 
 const Home = () => {
   const [crow, setCrow] = useState('');
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
+    await dbService.collection(COLLECTION).add({
+      crow,
+      createdAt: Date.now(),
+    });
+    setCrow('');
   }
   const onChange = (event) => {
     const { target: { value } } = event;
