@@ -1,6 +1,6 @@
 import AuthForm from 'components/AuthForm';
 import { authService, firebaseInstance } from 'firebaseSetup';
-import React, { useState } from 'react';
+import React from 'react';
 
 const Auth = () => {
 
@@ -13,7 +13,7 @@ const Auth = () => {
     } else if (name === 'github') {
       provider = new firebaseInstance.auth.GithubAuthProvider();
     }
-    const data = await authService.signInWithPopup(provider);
+    await authService.signInWithPopup(provider);
   }
 
   return (
