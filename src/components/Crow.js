@@ -53,6 +53,9 @@ const Crow = ({ crowObject, isOwner }) => {
       ) : (
         <>
           <h4>{crowObject.text}</h4>
+          { crowObject.imgUrl &&
+            <img src={crowObject.imgUrl} width="50px" height="50px" />
+          }
           { isOwner && <>
             <button onClick={onDeleteClick}>Delete Crow</button>
             <button onClick={toggleEditing}>Edit Crow</button>
