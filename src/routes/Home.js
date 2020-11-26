@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { dbService } from 'firebaseSetup';
 import { COLLECTION } from '../constants';
+import Crow from 'components/crow';
 
 const Home = ({ userObject }) => {
   const [crow, setCrow] = useState('');
@@ -41,9 +42,11 @@ const Home = ({ userObject }) => {
       </form>
       <div>
         {crows.map(item => (
-          <div key={item.id}>
-            <h4>{item.text}</h4>
-          </div>
+          <Crow
+            key={item.id}
+            crowObject={item}
+            isOwner={userObject.uid === item.creatorId}
+          />
         ))}
       </div>
     </div>
