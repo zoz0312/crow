@@ -1,9 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { dbService } from 'firebaseSetup';
 import { COLLECTION } from '../constants';
 
 const Home = () => {
   const [crow, setCrow] = useState('');
+  const [crows, setCrows] = useState([]);
+  const getCrows = async () => {
+    const listUpCrows = await dbService.collection(COLLECTION).get();
+    listUpCrows.forEach(document => {
+      const crowObject = {
+        ...document.data(),
+        id: document.id,
+      }
+      setCrows(prev => [crowObject, ...prev]);
+    });
+  }
+
+  useEffect(() => {
+    getCrows();
+  }, []);
+
   const onSubmit = async (event) => {
     event.preventDefault();
     await dbService.collection(COLLECTION).add({
@@ -29,6 +45,13 @@ const Home = () => {
           />
         <button>까악하기</button>
       </form>
+      <div>
+        {crows.map(item => (
+          <div key={item.id}>
+            <h4>{item.crow}</h4>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
