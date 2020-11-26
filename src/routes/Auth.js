@@ -1,6 +1,9 @@
 import AuthForm from 'components/AuthForm';
 import { authService, firebaseInstance } from 'firebaseSetup';
 import React from 'react';
+import { Image } from 'react-bootstrap';
+import './Auth.scss'
+import crow from 'image/crow.jpg';
 
 const Auth = () => {
 
@@ -17,7 +20,8 @@ const Auth = () => {
   }
 
   return (
-    <div>
+    <div className="login-container">
+      <Image className="crow-image" src={`${crow}`} roundedCircle />
       <AuthForm />
       <div>
         <button onClick={onSocialClick} name="google">구글로 계속하기</button>

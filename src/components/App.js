@@ -35,11 +35,13 @@ function App() {
   return (
     <Container>
       { init ?
-        <AppRouter
-          isLoggedIn={Boolean(userObject)}
-          userObject={userObject}
-          refreshUser={refreshUser}
-        />
+        <article className="main-article">
+          <AppRouter
+            isLoggedIn={Boolean(userObject)}
+            userObject={userObject}
+            refreshUser={refreshUser}
+          />
+        </article>
       : '동기화중...' }
     </Container>
   );
