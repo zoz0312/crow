@@ -9,11 +9,24 @@ function App() {
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
       if (user) {
-        setUserObject(user);
+        setUserObject({
+          uid: user.uid,
+          displayName: user.displayName,
+          updateProfile: (args) => user.updateProfile(args),
+        });
       }
       setInit(true);
     });
   }, []);
+
+  const refreshUser = () => {
+    const user = authService.currentUser;
+    setUserObject({
+      uid: user.uid,
+      displayName: user.displayName,
+      updateProfile: (args) => user.updateProfile(args),
+    });
+  }
 
   return (
     <>
@@ -21,6 +34,7 @@ function App() {
         <AppRouter
           isLoggedIn={Boolean(userObject)}
           userObject={userObject}
+          refreshUser={refreshUser}
         />
       : '동기화중...' }
     </>
