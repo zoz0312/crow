@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import AppRouter from 'components/Router';
 import { authService } from 'firebaseSetup';
+import { Container } from 'react-bootstrap';
+import './App.scss'
 
 function App() {
   const [init, setInit] = useState(false);
@@ -31,7 +33,7 @@ function App() {
   }
 
   return (
-    <>
+    <Container>
       { init ?
         <AppRouter
           isLoggedIn={Boolean(userObject)}
@@ -39,7 +41,7 @@ function App() {
           refreshUser={refreshUser}
         />
       : '동기화중...' }
-    </>
+    </Container>
   );
 }
 
