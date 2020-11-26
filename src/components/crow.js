@@ -12,7 +12,6 @@ const Crow = ({ crowObject, isOwner }) => {
   const onDeleteClick = async () => {
     const ok = window.confirm('삭제하시겠습니까악?');
     if (ok) {
-      // delete item;
       await dbService.doc(userDoc).delete();
     }
   };
@@ -20,6 +19,11 @@ const Crow = ({ crowObject, isOwner }) => {
   const onEditChange = (event) => {
     const { target : { value } } = event;
     setNewCrow(value);
+  }
+
+  const onEditCancle = () => {
+    setIsEditing(false);
+    setNewCrow(crowObject.text);
   }
 
   const onSubmit = async (event) => {
@@ -43,16 +47,18 @@ const Crow = ({ crowObject, isOwner }) => {
               onChange={onEditChange}
             />
             <button>수정</button>
-            <button type="button" onClick={() => setIsEditing(false)}>취소</button>
+            <button type="button" onClick={onEditCancle}>취소</button>
           </form>
         </>
       ) : (
-        <h4>{crowObject.text}</h4>
+        <>
+          <h4>{crowObject.text}</h4>
+          { isOwner && <>
+            <button onClick={onDeleteClick}>Delete Crow</button>
+            <button onClick={toggleEditing}>Edit Crow</button>
+          </> }
+        </>
       )}
-      { isOwner && !isEditing && <>
-        <button onClick={onDeleteClick}>Delete Crow</button>
-        <button onClick={toggleEditing}>Edit Crow</button>
-      </> }
     </div>
   );
 }

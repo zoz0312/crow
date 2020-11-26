@@ -5,7 +5,7 @@ import { authService } from 'firebaseSetup';
 function App() {
   const [init, setInit] = useState(false);
   const [userObject, setUserObject] = useState(null);
-  const isLoggedIn = useMemo(() => (userObject ? true : false), [userObject]);
+
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
       if (user) {
@@ -13,12 +13,13 @@ function App() {
       }
       setInit(true);
     });
-  }, [])
+  }, []);
+
   return (
     <>
       { init ?
         <AppRouter
-          isLoggedIn={isLoggedIn}
+          isLoggedIn={Boolean(userObject)}
           userObject={userObject}
         />
       : '동기화중...' }
