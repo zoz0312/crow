@@ -13,11 +13,11 @@ const AppRouter = ({ isLoggedIn, userObject }) => {
         {isLoggedIn ?
           <>
             <Route exact path="/">
-              <Home
-                userObject={userObject}
-              />
+              <Home userObject={userObject} />
             </Route>
-            <Route exact path="/profile" component={Profile} />
+            <Route exact path="/profile">
+              <Profile userObject={userObject} />
+            </Route>
             <Redirect from="*" to="/" />
           </>
           :<>
