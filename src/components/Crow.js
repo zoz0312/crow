@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { dbService } from 'firebaseSetup';
+import { dbService, storageService } from 'firebaseSetup';
 import { COLLECTION } from '../constants';
 
 const Crow = ({ crowObject, isOwner }) => {
@@ -13,6 +13,7 @@ const Crow = ({ crowObject, isOwner }) => {
     const ok = window.confirm('삭제하시겠습니까악?');
     if (ok) {
       await dbService.doc(userDoc).delete();
+      await storageService.refFromURL(crowObject.imgUrl).delete();
     }
   };
 
