@@ -1,23 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import AppRouter from 'components/Router';
 import { authService } from 'firebaseSetup';
 
 function App() {
   const [init, setInit] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(null);
+  const [userObject, setUserObject] = useState(null);
+  const isLoggedIn = useMemo(() => (userObject ? true : false), [userObject]);
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
       if (user) {
-        setIsLoggedIn(true);
-      } else {
-        setIsLoggedIn(false);
+        setUserObject(user);
       }
       setInit(true);
     });
   }, [])
   return (
     <>
-      { init ? <AppRouter isLoggedIn={isLoggedIn} /> : '동기화중...' }
+      { init ?
+        <AppRouter
+          isLoggedIn={isLoggedIn}
+          userObject={userObject}
+        />
+      : '동기화중...' }
     </>
   );
 }

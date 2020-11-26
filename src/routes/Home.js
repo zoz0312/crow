@@ -2,29 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { dbService } from 'firebaseSetup';
 import { COLLECTION } from '../constants';
 
-const Home = () => {
+const Home = ({ userObject }) => {
   const [crow, setCrow] = useState('');
   const [crows, setCrows] = useState([]);
-  const getCrows = async () => {
-    const listUpCrows = await dbService.collection(COLLECTION).get();
-    listUpCrows.forEach(document => {
-      const crowObject = {
-        ...document.data(),
-        id: document.id,
-      }
-      setCrows(prev => [crowObject, ...prev]);
-    });
-  }
 
   useEffect(() => {
-    getCrows();
+    dbService.collection(COLLECTION).onSnapshot((snap) => {
+      const snaps = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setCrows(snaps);
+    })
   }, []);
 
   const onSubmit = async (event) => {
     event.preventDefault();
     await dbService.collection(COLLECTION).add({
-      crow,
+      text: crow,
       createdAt: Date.now(),
+      creatorId: userObject.uid,
     });
     setCrow('');
   }
@@ -48,7 +42,7 @@ const Home = () => {
       <div>
         {crows.map(item => (
           <div key={item.id}>
-            <h4>{item.crow}</h4>
+            <h4>{item.text}</h4>
           </div>
         ))}
       </div>
