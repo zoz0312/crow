@@ -1,4 +1,4 @@
-import AuthForm from 'components/Auth/AuthForm';
+import AuthForm from 'components/AuthForm';
 import { authService, firebaseInstance } from 'firebaseSetup';
 import React, { useEffect, useState } from 'react';
 import { Button, Image } from 'react-bootstrap';
