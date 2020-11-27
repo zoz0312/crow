@@ -3,10 +3,12 @@ import AppRouter from 'components/Router';
 import { authService } from 'firebaseSetup';
 import { Container } from 'react-bootstrap';
 import './App.scss'
+import LoadSpinner from './LoadSpinner';
 
 function App() {
   const [init, setInit] = useState(false);
   const [userObject, setUserObject] = useState(null);
+  const [isLoadded, setIsLoadded] = useState(false);
 
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
@@ -20,6 +22,7 @@ function App() {
         setUserObject(null);
       }
       setInit(true);
+      setIsLoadded(true);
     });
   }, []);
 
@@ -33,17 +36,21 @@ function App() {
   }
 
   return (
-    <Container>
-      { init ?
-        <article className="main-article">
-          <AppRouter
-            isLoggedIn={Boolean(userObject)}
-            userObject={userObject}
-            refreshUser={refreshUser}
-          />
-        </article>
-      : '동기화중...' }
-    </Container>
+    <>
+      <Container>
+        { init ?
+          <article className="main-article">
+            <AppRouter
+              isLoggedIn={Boolean(userObject)}
+              userObject={userObject}
+              refreshUser={refreshUser}
+              isLoadded={(isLoadded) => setIsLoadded(isLoadded)}
+            />
+          </article>
+        : '동기화중...' }
+      </Container>
+      <LoadSpinner isLoadded={isLoadded} />
+    </>
   );
 }
 

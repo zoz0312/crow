@@ -26,7 +26,9 @@ const AppRouter = ({ isLoggedIn, userObject, refreshUser }) => {
             <Redirect from="*" to="/" />
           </>
           :<>
-            <Route exact path="/" component={Auth} />
+            <Route exact path="/">
+              <Auth />
+            </Route>
             <Redirect from="*" to="/" />
           </>
         }

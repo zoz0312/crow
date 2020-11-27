@@ -1,0 +1,34 @@
+.body__dimming {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  opacity: .8;
+  background-color: #333333;
+}
+
+.dimming__contain {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+$loading-transition: opacity 500ms;
+.loading-enter {
+  opacity: 0;
+}
+.loading-enter-active {
+  opacity: 1;
+  transition: $loading-transition;
+}
+.loading-exit {
+  opacity: 1;
+}
+.loading-exit-active {
+  opacity: 0;
+  transition: $loading-transition;
+}
