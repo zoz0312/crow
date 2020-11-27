@@ -1,7 +1,7 @@
 import { authService, dbService } from 'firebaseSetup';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { COLLECTION } from '../constants';
+// import { COLLECTION } from '../constants';
 
 const Profile = ({ userObject, refreshUser }) => {
   const history = useHistory();

@@ -19,7 +19,6 @@ const Home = ({ userObject }) => {
 
   return (
     <div>
-      <span>Home</span>
       <CrowFactory userObject={userObject} />
       {crows.map(item => (
         <Crow
