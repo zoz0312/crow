@@ -1,6 +1,7 @@
 import { authService } from 'firebaseSetup';
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { CSSTransition } from 'react-transition-group';
 import './AuthForm.scss';
 
 const AuthForm = () => {
@@ -59,7 +60,12 @@ const AuthForm = () => {
         required
         value={password}
         onChange={onChange} />
-      { newAccount &&
+      <CSSTransition
+        in={newAccount}
+        timeout={200}
+        classNames="second-password"
+        unmountOnExit
+      >
         <Form.Control
           name="password2"
           type="password"
@@ -68,7 +74,7 @@ const AuthForm = () => {
           required
           value={recapPassword}
           onChange={onChange} />
-      }
+      </CSSTransition>
       { error }
       <Button
         type="submit"

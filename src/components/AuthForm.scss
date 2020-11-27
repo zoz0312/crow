@@ -18,3 +18,21 @@
     background-color: #646870;
   }
 }
+
+.second-password-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.second-password-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.second-password-exit {
+  opacity: 1;
+}
+.second-password-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
+}
