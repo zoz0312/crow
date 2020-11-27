@@ -18,8 +18,13 @@ $personal-light: #85c1e6;
 
   & > input {
     border-radius: 5rem;
+
+    &::placeholder {
+      color: rgba($color: #333333, $alpha: 0.5);
+    }
   }
   & > button {
+    width: 50px;
     color: white;
     &:focus {
       box-shadow: none;

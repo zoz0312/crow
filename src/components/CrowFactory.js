@@ -70,14 +70,16 @@ const CrowFactory = ({ userObject }) => {
           maxLength={120}
           value={crow}
           onChange={onChange}
+          disabled={isSubmitting}
         />
         <LoadingButton
+          type="submit"
           isLoading={isSubmitting}
         >
           <FontAwesomeIcon icon={faCrow} />
         </LoadingButton>
       </div>
-      {   base64 ? (
+      { base64 ? (
         <>
           <div className="crow-container__image-preview">
             <img src={base64} width="50px" height="50px" />
@@ -87,6 +89,7 @@ const CrowFactory = ({ userObject }) => {
             variant=""
             className="btn-remove-image"
             onClick={onClearFile}
+            disabled={isSubmitting}
           >사진지우기</Button>
         </>
       ) : (
