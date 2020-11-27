@@ -8,9 +8,11 @@ import './Auth.scss'
 import crow from 'image/crow.jpg';
 
 const Auth = () => {
-
   const [newAccount, setNewAccount] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const toggleAccount = () => setNewAccount((prev) => !prev);
+  const toggleSubmitting = (isSubmitting) => setIsSubmitting(isSubmitting);
 
   const onSocialClick = async (evnet) => {
     const { target: { name } } = evnet;
@@ -29,6 +31,8 @@ const Auth = () => {
       <Image className="crow-image" src={`${crow}`} roundedCircle />
       <AuthForm
         newAccount={newAccount}
+        toggleSubmitting={toggleSubmitting}
+        isSubmitting={isSubmitting}
       />
       <div className="login-container__option-container">
         <Button

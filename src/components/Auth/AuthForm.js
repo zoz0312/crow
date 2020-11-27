@@ -3,8 +3,9 @@ import React, { useState, useRef } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { CSSTransition } from 'react-transition-group';
 import './AuthForm.scss';
+import LoadingButton from 'entities/Button/LoadingButton';
 
-const AuthForm = ({ newAccount }) => {
+const AuthForm = ({ newAccount, toggleSubmitting, isSubmitting }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [recapPassword, setRecapPassword] = useState('');
@@ -49,11 +50,13 @@ const AuthForm = ({ newAccount }) => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
+    toggleSubmitting(true);
     try {
       if (newAccount) {
         // create account
         if (password !== recapPassword) {
           errorText(`비밀번호가 다르다 까악!`);
+          toggleSubmitting(false);
           return;
         }
         await authService.createUserWithEmailAndPassword(email, password);
@@ -65,6 +68,7 @@ const AuthForm = ({ newAccount }) => {
     } catch (error) {
       errorText(error.message);
     }
+    toggleSubmitting(false);
   }
 
   return (<>
@@ -106,13 +110,14 @@ const AuthForm = ({ newAccount }) => {
           onChange={onChange} />
       </CSSTransition>
 
-      <Button
+      <LoadingButton
         type="submit"
         variant=""
         className="base-button auth-containter--submit"
+        isLoading={isSubmitting}
       >
         {newAccount ? '유저 생성' : '로그인'}
-      </Button>
+      </LoadingButton>
 
       <CSSTransition
         nodeRef={erorrRef}
