@@ -1,6 +1,6 @@
 import AuthForm from 'components/Auth/AuthForm';
 import { authService, firebaseInstance } from 'firebaseSetup';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Image } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons"
@@ -11,6 +11,14 @@ import crow from 'image/crow.jpg';
 const Auth = () => {
   const [newAccount, setNewAccount] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (isSubmitting) {
+      if (newAccount) {
+        setNewAccount(false);
+      }
+    }
+  }, [isSubmitting])
 
   const toggleAccount = () => setNewAccount((prev) => !prev);
   const toggleSubmitting = (isSubmitting) => setIsSubmitting(isSubmitting);
