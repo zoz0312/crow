@@ -42,6 +42,7 @@ const Auth = () => {
 
   return (
     <div className="login-container">
+      <span className="login-container--title">Crow</span>
       <Image className="crow-image" src={`${crow}`} roundedCircle />
       <AuthForm
         newAccount={newAccount}
