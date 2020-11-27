@@ -1,17 +1,40 @@
 import { authService } from 'firebaseSetup';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { CSSTransition } from 'react-transition-group';
 import './AuthForm.scss';
 
-const AuthForm = () => {
-  const [newAccount, setNewAccount] = useState(false);
+const AuthForm = ({ newAccount }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [recapPassword, setRecapPassword] = useState('');
-  const [error, setError] = useState(null);
 
-  const toggleAccount = () => setNewAccount((prev) => !prev);
+  const passwordRef = useRef(null);
+
+  const [error, setError] = useState(null);
+  const errorCss = 'error-alram';
+  const erorrRef = useRef(null);
+  const timeout = {
+    enter: 100,
+    exit: 100,
+  }
+
+  const errorText = (text = null) => {
+    setError(text);
+    if (text && erorrRef.current) {
+      erorrAnimationReload();
+    }
+  }
+
+  const erorrAnimationReload = () => {
+    const animationClass = erorrRef.current.classList;
+    animationClass.remove(`${errorCss}-enter-done`);
+    animationClass.add(`${errorCss}-enter-active`);
+    setTimeout(() => {
+      animationClass.remove(`${errorCss}-enter-active`);
+      animationClass.add(`${errorCss}-enter-done`);
+    }, timeout.enter)
+  }
 
   const onChange = (event) => {
     const { target : { name, value } } = event;
@@ -29,13 +52,18 @@ const AuthForm = () => {
     try {
       if (newAccount) {
         // create account
+        if (password !== recapPassword) {
+          errorText(`비밀번호가 다르다 까악!`);
+          return;
+        }
         await authService.createUserWithEmailAndPassword(email, password);
       } else {
         // login
         await authService.signInWithEmailAndPassword(email, password);
       }
+      errorText()
     } catch (error) {
-      setError(error.message);
+      errorText(error.message);
     }
   }
 
@@ -61,12 +89,14 @@ const AuthForm = () => {
         value={password}
         onChange={onChange} />
       <CSSTransition
+        nodeRef={passwordRef}
         in={newAccount}
         timeout={200}
         classNames="second-password"
         unmountOnExit
       >
         <Form.Control
+          ref={passwordRef}
           name="password2"
           type="password"
           className="auth-containter--input"
@@ -75,16 +105,31 @@ const AuthForm = () => {
           value={recapPassword}
           onChange={onChange} />
       </CSSTransition>
-      { error }
+
       <Button
         type="submit"
         variant=""
-        className="login-button"
+        className="base-button auth-containter--submit"
       >
-        {newAccount ? '유저 생성하기' : '로그인'}
+        {newAccount ? '유저 생성' : '로그인'}
       </Button>
+
+      <CSSTransition
+        nodeRef={erorrRef}
+        in={Boolean(error)}
+        timeout={timeout}
+        classNames={errorCss}
+        mountOnEnter
+        unmountOnExit
+      >
+        <span
+          ref={erorrRef}
+          className="auth-container--text"
+        >
+          { error }
+        </span>
+      </CSSTransition>
     </Form>
-    <Button onClick={toggleAccount}>{newAccount ? '로그인' : '유저 생성하기' }</Button>
   </>);
 }
 

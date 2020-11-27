@@ -1,0 +1,36 @@
+.base-button {
+  color: #EEE;
+  background-color: #262628;
+  &:hover {
+    color: #EEE;
+    background-color: #646870;
+  }
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba(38,38,40,.25);
+  }
+}
+
+.google-button {
+  margin-top: 2px;
+  color: white;
+  background-color: #CB3F22;
+  &:hover {
+    color: white;
+    background-color: #cf553d;
+  }
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba(207, 85, 61, .25);
+  }
+}
+
+.github-button {
+  color: white;
+  background-color: #222222;
+  &:hover {
+    color: white;
+    background-color: #333333;
+  }
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba(51, 51, 51, .25);
+  }
+}

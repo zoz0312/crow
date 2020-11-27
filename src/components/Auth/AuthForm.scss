@@ -1,0 +1,78 @@
+.login__auth-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.auth-containter--input {
+  margin-bottom: 10px;
+}
+
+.auth-containter--submit {
+  margin-bottom: 10px;
+}
+
+.auth-container--text {
+  text-align: center;
+  color: #f54545;
+  font-weight: 100;
+  margin-bottom: 0px;
+}
+
+.second-password-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.second-password-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.second-password-exit {
+  opacity: 1;
+}
+.second-password-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
+}
+
+$error-transition: all 100ms;
+$error__small-size: 1rem;
+$error__big-size: 1.2rem;
+
+.error-alram-enter {
+  opacity: 0;
+  transform: scale(0.9);
+  height: 0;
+}
+.error-alram-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  font-size: $error__big-size;
+  height: $error__big-size * 2;
+  line-height: $error__big-size;
+  transition: $error-transition;
+}
+.error-alram-enter-done {
+  font-size: $error__small-size;
+  height: $error__small-size * 2;
+  line-height: $error__small-size;
+  transition: $error-transition;
+}
+.error-alram-exit {
+  opacity: 1;
+  font-size: $error__small-size;
+  height: $error__small-size * 2;
+  line-height: $error__small-size;
+}
+.error-alram-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  font-size: 0;
+  height: 0;
+  line-height: 0;
+  transition: $error-transition;
+}
