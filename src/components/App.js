@@ -12,6 +12,7 @@ function App() {
 
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
+      setIsLoadded(false);
       if (user) {
         setUserObject({
           uid: user.uid,
@@ -24,6 +25,10 @@ function App() {
       setInit(true);
       setIsLoadded(true);
     });
+
+    return () => {
+      setUserObject(null);
+    }
   }, []);
 
   const refreshUser = () => {
@@ -38,7 +43,7 @@ function App() {
   return (
     <>
       <Container>
-        { init ?
+        { init &&
           <article className="main-article">
             <AppRouter
               isLoggedIn={Boolean(userObject)}
@@ -47,9 +52,9 @@ function App() {
               isLoadded={(isLoadded) => setIsLoadded(isLoadded)}
             />
           </article>
-        : '동기화중...' }
+        }
       </Container>
-      <LoadSpinner isLoadded={isLoadded} />
+      <LoadSpinner isLoadded={isLoadded } />
     </>
   );
 }

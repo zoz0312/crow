@@ -11,7 +11,10 @@ const Home = ({ userObject }) => {
     dbService.collection(COLLECTION).onSnapshot((snap) => {
       const snaps = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setCrows(snaps);
-    })
+    });
+    return () => {
+      setCrows([]);
+    };
   }, []);
 
   return (

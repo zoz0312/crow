@@ -26,8 +26,10 @@ const Auth = () => {
     } else if (name === 'github') {
       provider = new firebaseInstance.auth.GithubAuthProvider();
     }
+    setTimeout(() => {
+      setIsSubmitting(false);
+    }, 5000);
     await authService.signInWithPopup(provider);
-    setIsSubmitting(false);
   }
 
   return (

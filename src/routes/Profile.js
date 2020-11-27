@@ -12,16 +12,19 @@ const Profile = ({ userObject, refreshUser }) => {
     history.push('/');
   }
 
-  const getMyProfile = async () => {
-    const crows = await dbService
-      .collection(COLLECTION)
-      .where('creatorId', '==', userObject.uid)
-      // .orderBy('createdAt')
-      .get();
+  // const getMyProfile = async () => {
+  //   const crows = await dbService
+  //     .collection(COLLECTION)
+  //     .where('creatorId', '==', userObject.uid)
+  //     // .orderBy('createdAt')
+  //     .get();
 
-    const data = crows.docs.map(doc => doc.data());
-    console.log('data', data);
-  };
+  //   crows.docs.map(doc => doc.data());
+  // };
+
+  // useEffect(() => {
+  //   getMyProfile();
+  // }, []);
 
   const onChange = (event) => {
     const { target : { value } } = event;
@@ -38,10 +41,6 @@ const Profile = ({ userObject, refreshUser }) => {
       refreshUser();
     }
   }
-
-  useEffect(() => {
-    getMyProfile();
-  }, []);
 
   return (
     <>
