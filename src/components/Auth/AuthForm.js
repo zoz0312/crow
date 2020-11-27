@@ -49,6 +49,7 @@ const AuthForm = ({ newAccount, toggleSubmitting, isSubmitting }) => {
   }
 
   const onSubmit = async (event) => {
+    if (isSubmitting) return;
     event.preventDefault();
     toggleSubmitting(true);
     try {

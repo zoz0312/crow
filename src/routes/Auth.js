@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Button, Image } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons"
+import LoadingButton from 'entities/Button/LoadingButton';
 import './Auth.scss'
 import crow from 'image/crow.jpg';
 
@@ -14,16 +15,19 @@ const Auth = () => {
   const toggleAccount = () => setNewAccount((prev) => !prev);
   const toggleSubmitting = (isSubmitting) => setIsSubmitting(isSubmitting);
 
-  const onSocialClick = async (evnet) => {
-    const { target: { name } } = evnet;
+  const onSocialClick = async (event) => {
+    if (isSubmitting) return;
+    const { currentTarget: { name } } = event;
     let provider;
 
+    setIsSubmitting(true);
     if (name === 'google') {
       provider = new firebaseInstance.auth.GoogleAuthProvider();
     } else if (name === 'github') {
       provider = new firebaseInstance.auth.GithubAuthProvider();
     }
     await authService.signInWithPopup(provider);
+    setIsSubmitting(false);
   }
 
   return (
@@ -42,22 +46,24 @@ const Auth = () => {
         >
           {newAccount ? '로그인하기' : '유저 생성하기' }
         </Button>
-        <Button
-          onClick={onSocialClick}
+        <LoadingButton
+          buttonClick={onSocialClick}
           name="google"
           variant=""
           className="google-button"
+          isLoading={isSubmitting}
         >
           <FontAwesomeIcon icon={faGoogle} />&nbsp;구글 로그인
-        </Button>
-        <Button
-          onClick={onSocialClick}
+        </LoadingButton>
+        <LoadingButton
+          buttonClick={onSocialClick}
           name="github"
           variant=""
           className="github-button"
+          isLoading={isSubmitting}
         >
           <FontAwesomeIcon icon={faGithub} />&nbsp;깃허브 로그인
-        </Button>
+        </LoadingButton>
       </div>
     </div>
   )
