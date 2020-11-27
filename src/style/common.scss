@@ -1,9 +1,15 @@
+$personal-font-color: #414141;
+$personal-think: #69a8db;
+$personal-light: #85c1e6;
+
 .base-button {
-  color: #414141;
-  background-color: #69a8db;
+  height: 2.5rem;
+  line-height: 1.5rem;
+  color: $personal-font-color;
+  background-color: $personal-think;
   &:hover {
-    color: #414141;
-    background-color: #85c1e6;
+    color: $personal-font-color;
+    background-color: $personal-light;
   }
   &:focus {
     box-shadow: 0 0 0 0.2rem rgba(38,38,40,.25);
@@ -11,6 +17,8 @@
 }
 
 .google-button {
+  height: 2.5rem;
+  line-height: 1.5rem;
   margin-top: 2px;
   color: white;
   background-color: #CB3F22;
@@ -24,6 +32,8 @@
 }
 
 .github-button {
+  height: 2.5rem;
+  line-height: 1.5rem;
   color: white;
   background-color: #222222;
   &:hover {

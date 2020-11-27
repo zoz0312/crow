@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { v4 as uuid } from 'uuid';
 import { dbService, storageService } from 'firebaseSetup';
 import { COLLECTION } from '../constants';
+import { faCrow, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import LoadingButton from 'entities/Button/LoadingButton';
+import { Button, Form } from 'react-bootstrap';
+
+import './CrowFactory.scss';
 
 const CrowFactory = ({ userObject }) => {
   const [crow, setCrow] = useState('');
-  const [base64, setBase64] = useState();
+  const [base64, setBase64] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const imageFileRef = useRef(null);
 
   const onSubmit = async (event) => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
     event.preventDefault();
 
     let imgUrl = '';
@@ -25,16 +36,18 @@ const CrowFactory = ({ userObject }) => {
       ...imgUrl && { imgUrl },
     });
     setCrow('');
+    setIsSubmitting(false);
   }
 
   const onChange = (event) => {
-    const { target: { value } } = event;
+    const { currentTarget: { value } } = event;
     setCrow(value);
   };
 
-  const onFileCHange = (event) => {
+  const onFileChange = (event) => {
     const { target: { files } } = event;
     const [file] = files;
+    if (!file) return;
     const reader = new FileReader();
     reader.onloadend = (loadEvent) => {
       // finish file load
@@ -43,26 +56,53 @@ const CrowFactory = ({ userObject }) => {
     reader.readAsDataURL(file);
   }
 
-  const onClearFile = () => setBase64(null);
+  const onClearFile = () => {
+    imageFileRef.current.value = null;
+    setBase64(null)
+  };
 
   return (
-    <form onSubmit={onSubmit}>
-      <input
-        type="text"
-        placeholder="까악!"
-        maxLength={120}
-        value={crow}
-        onChange={onChange}
-      />
-      <input type="file" accept="image/*" onChange={onFileCHange} />
-      <button>까악하기</button>
-      { base64 && (
-        <div>
-          <img src={base64} width="50px" height="50px" />
-          <button type="button" onClick={onClearFile}>사진지우기</button>
-        </div>
+    <Form onSubmit={onSubmit} className="crow-form">
+      <div className="crow-form__crow-container">
+        <Form.Control
+          type="text"
+          placeholder="까악!"
+          maxLength={120}
+          value={crow}
+          onChange={onChange}
+        />
+        <LoadingButton
+          isLoading={isSubmitting}
+        >
+          <FontAwesomeIcon icon={faCrow} />
+        </LoadingButton>
+      </div>
+      {   base64 ? (
+        <>
+          <div className="crow-container__image-preview">
+            <img src={base64} width="50px" height="50px" />
+          </div>
+          <Button
+            type="button"
+            variant=""
+            className="btn-remove-image"
+            onClick={onClearFile}
+          >사진지우기</Button>
+        </>
+      ) : (
+        <label
+          htmlFor="upload_image"
+          className="crow-container--label"
+        >이미지 추가&nbsp;<FontAwesomeIcon icon={faPlus} /></label>
       )}
-    </form>
+      <Form.Control
+        type="file"
+        id="upload_image"
+        accept="image/*"
+        ref={imageFileRef}
+        onChange={onFileChange}
+      />
+    </Form>
   )
 }
 

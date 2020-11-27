@@ -1,0 +1,89 @@
+$personal-font-color: #414141;
+$personal-think: #69a8db;
+$personal-light: #85c1e6;
+
+.crow-form {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.crow-form__crow-container {
+  display: flex;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba($color: white, $alpha: 0);
+  border-radius: 5rem;
+  background-color: #69a8db;
+  box-shadow: 0 3px 2px 1px rgba($color: white, $alpha: .3);
+
+  & > input {
+    border-radius: 5rem;
+  }
+  & > button {
+    color: white;
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+@mixin sameOption {
+  color: white;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba($color: white, $alpha: 0);
+  border-radius: 0 0 5px 5px;
+  background-color: $personal-think;
+  box-shadow: $contain-shadow;
+  transition: background-color .15s ease-in-out;
+  &:hover {
+    transition: background-color .15s ease-in-out;
+  }
+}
+
+$label-width: 100px;
+$contain-shadow: 0 2px 2px 2px rgba($color: white, $alpha: .3);
+.crow-container--label {
+  @include sameOption;
+  position: absolute;
+  width: $label-width;
+  height: 20px;
+  line-height: 20px;
+  left: calc(50% - #{$label-width}/2);
+  text-align: center;
+  font-size: .5rem;
+  cursor: pointer;
+  &:hover {
+    background-color: $personal-light;
+  }
+}
+
+$image-preview-width: 250px;
+.crow-container__image-preview {
+  @include sameOption;
+  width: $image-preview-width;
+  height: auto;
+  padding: 10px;
+  margin: 0 auto;
+  text-align: center;
+
+  & > img {
+    width: $image-preview-width - 20px;
+    height: auto;
+  }
+}
+
+.btn-remove-image {
+  @include sameOption;
+  &:hover {
+    color: white;
+    background-color: $personal-light;
+  }
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+#upload_image {
+  display: none;
+}

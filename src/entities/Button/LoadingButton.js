@@ -29,7 +29,7 @@ const LoadingButton = ({
             role="status"
             aria-hidden="true"
           />
-          <span>&nbsp;로딩중</span>
+          {/* <span>&nbsp;로딩중</span> */}
         </>
       ) : children}
     </Button>
