@@ -3,11 +3,7 @@
 .base-button {
   height: 2.5rem;
   line-height: 1.5rem;
-  color: white;
   @include btn-base-color($personal-think, $personal-light);
-  &:hover {
-    color: white;
-  }
 }
 
 .google-button {
@@ -16,9 +12,6 @@
   margin-top: 2px;
   color: white;
   @include btn-base-color(#CB3F22, #cf553d);
-  &:hover {
-    color: white;
-  }
 }
 
 .github-button {
@@ -26,9 +19,6 @@
   line-height: 1.5rem;
   color: white;
   @include btn-base-color(#222222, #333333);
-  &:hover {
-    color: white;
-  }
 }
 
 .fixed-button,
@@ -38,14 +28,10 @@
   padding: 2px 5px;
   border: 1px solid white;
   border-radius: 20px;
-  color: white;
-  &:hover {
-    color: white;
-  }
 }
 
 .fixed-button {
-  @include btn-base-color($personal-think, white);
+  @include btn-base-color($personal-think, $personal-light);
 }
 
 .cancle-button {

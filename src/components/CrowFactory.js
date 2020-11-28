@@ -62,50 +62,52 @@ const CrowFactory = ({ userObject }) => {
   };
 
   return (
-    <Form onSubmit={onSubmit} className="crow-form">
-      <div className="crow-form__crow-container">
-        <Form.Control
-          type="text"
-          placeholder="까악!"
-          maxLength={120}
-          value={crow}
-          onChange={onChange}
-          disabled={isSubmitting}
-        />
-        <LoadingButton
-          type="submit"
-          isLoading={isSubmitting}
-        >
-          <FontAwesomeIcon icon={faCrow} />
-        </LoadingButton>
-      </div>
-      { base64 ? (
-        <>
-          <div className="crow-container__image-preview">
-            <img src={base64} width="50px" height="50px" />
-          </div>
-          <Button
-            type="button"
-            variant=""
-            className="btn-remove-image"
-            onClick={onClearFile}
+    <div className="crow-contain">
+      <Form onSubmit={onSubmit} className="crow-form">
+        <div className="crow-form__crow-container">
+          <Form.Control
+            type="text"
+            placeholder="까악!"
+            maxLength={120}
+            value={crow}
+            onChange={onChange}
             disabled={isSubmitting}
-          >사진지우기</Button>
-        </>
-      ) : (
-        <label
-          htmlFor="upload_image"
-          className="crow-container--label"
-        >이미지 추가&nbsp;<FontAwesomeIcon icon={faPlus} /></label>
-      )}
-      <Form.Control
-        type="file"
-        id="upload_image"
-        accept="image/*"
-        ref={imageFileRef}
-        onChange={onFileChange}
-      />
-    </Form>
+          />
+          <LoadingButton
+            type="submit"
+            isLoading={isSubmitting}
+          >
+            <FontAwesomeIcon icon={faCrow} />
+          </LoadingButton>
+        </div>
+        { base64 ? (
+          <>
+            <div className="crow-container__image-preview">
+              <img src={base64} width="50px" height="50px" />
+            </div>
+            <Button
+              type="button"
+              variant=""
+              className="btn-remove-image"
+              onClick={onClearFile}
+              disabled={isSubmitting}
+            >사진지우기</Button>
+          </>
+        ) : (
+          <label
+            htmlFor="upload_image"
+            className="crow-container--label"
+          >이미지 추가&nbsp;<FontAwesomeIcon icon={faPlus} /></label>
+        )}
+        <Form.Control
+          type="file"
+          id="upload_image"
+          accept="image/*"
+          ref={imageFileRef}
+          onChange={onFileChange}
+        />
+      </Form>
+    </div>
   )
 }
 

@@ -16,7 +16,9 @@ $transitioned:
   background-color: $colored;
   border-color: rgba($color: $colored, $alpha: 0);
   transition: $transitioned;
+  color: white;
   &:hover {
+    color: white;
     background-color: $colored-hover;
     border-color: rgba($color: $colored-hover, $alpha: 0);
     transition: $transitioned;

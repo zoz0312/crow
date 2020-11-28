@@ -1,17 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { dbService, storageService } from 'firebaseSetup';
 import { COLLECTION } from '../constants';
 import { Form, Button } from 'react-bootstrap';
 import { faPen, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import LoadingButton from '../entities/Button/LoadingButton';
-import './Crow.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { CSSTransition } from 'react-transition-group';
+import './Crow.scss';
 
 const Crow = ({ crowObject, isOwner }) => {
   const userDoc = `${COLLECTION}/${crowObject.id}`;
   const [isEditing, setIsEditing] = useState(false);
   const [newCrow, setNewCrow] = useState(crowObject.text);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const cardRef = useRef(null);
+  const cardFixedRef = useRef(null);
+
+  const cardCss = 'crow-animation';
+  const cardFixedCss = 'crow-fixed-animation';
+  const cardTimeout = 500;
 
   useEffect(() => {
     return () => {
@@ -21,7 +29,9 @@ const Crow = ({ crowObject, isOwner }) => {
     }
   }, []);
 
-  const toggleEditing = () => setIsEditing(prev => !prev);
+  const toggleEditing = () => {
+    setIsEditing(prev => !prev);
+  }
 
   const onDeleteClick = async () => {
     if (isSubmitting) return;
@@ -56,9 +66,16 @@ const Crow = ({ crowObject, isOwner }) => {
   }
 
   return (
-    <div>
-      { isEditing ? (
-        <>
+    <>
+      <CSSTransition
+        nodeRef={cardFixedRef}
+        in={isEditing}
+        timeout={cardTimeout}
+        classNames={cardFixedCss}
+        mountOnEnter
+        unmountOnExit
+      >
+        <div ref={cardFixedRef}>
           <Form
             className="crow-card-fixed"
             onSubmit={onSubmit}
@@ -82,32 +99,43 @@ const Crow = ({ crowObject, isOwner }) => {
               className="cancle-button"
             >취소</Button>
           </Form>
-        </>
-      ) : (
-        <div className="crow-card">
-          { isOwner &&
-            <div className="crow-card--btn-group">
-              <Button
-                type="button"
-                className="crow-card__btn-edit"
-                variant=""
-                onClick={toggleEditing}
-              ><FontAwesomeIcon icon ={faPen} /></Button>
-              <LoadingButton
-                type="button"
-                className="crow-card__btn-delete"
-                buttonClick={onDeleteClick}
-                isLoading={isSubmitting}
-              ><FontAwesomeIcon icon ={faTrashAlt} /></LoadingButton>
-            </div>
-          }
-          <span className="crow-card--text">{crowObject.text}</span>
-          { crowObject.imgUrl &&
-            <img src={crowObject.imgUrl} width="50px" height="50px" />
-          }
         </div>
-      )}
-    </div>
+      </CSSTransition>
+
+      <CSSTransition
+        nodeRef={cardRef}
+        in={!isEditing}
+        timeout={cardTimeout}
+        classNames={cardCss}
+        mountOnEnter
+        unmountOnExit
+      >
+        <div ref={cardRef}>
+          <div className="crow-card">
+            { isOwner &&
+              <div className="crow-card--btn-group">
+                <Button
+                  type="button"
+                  className="crow-card__btn-edit"
+                  variant=""
+                  onClick={toggleEditing}
+                ><FontAwesomeIcon icon ={faPen} /></Button>
+                <LoadingButton
+                  type="button"
+                  className="crow-card__btn-delete"
+                  buttonClick={onDeleteClick}
+                  isLoading={isSubmitting}
+                ><FontAwesomeIcon icon ={faTrashAlt} /></LoadingButton>
+              </div>
+            }
+            <span className="crow-card--text">{crowObject.text}</span>
+            { crowObject.imgUrl &&
+              <img src={crowObject.imgUrl} width="50px" height="50px" />
+            }
+          </div>
+        </div>
+      </CSSTransition>
+    </>
   );
 }
 
