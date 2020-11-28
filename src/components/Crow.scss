@@ -12,7 +12,7 @@ $contain-shadow: 0 2px 2px 2px rgba($color: white, $alpha: .3);
   background-color: white;
   padding: .7rem;
   border: 3px solid #69a8db;
-  border-radius: 10px;
+  border-radius: 40px;
   margin-bottom: 2rem;
   flex-direction: row;
   justify-content: left;
@@ -44,41 +44,6 @@ $contain-shadow: 0 2px 2px 2px rgba($color: white, $alpha: .3);
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  & > button {
-    width: 100%;
-    height: 26px;
-    padding: 2px 5px;
-    border: 1px solid white;
-    border-radius: 20px;
-    color: white;
-    transition: background-color .15s ease-in-out;
-    &:hover {
-      color: white;
-      transition: background-color .15s ease-in-out;
-    }
-  }
-
-  & > .crow-card-fixed__modify {
-    background-color: $personal-think;
-    border-color: rgba($color: white, $alpha: 0);
-    &:hover {
-      background-color: $personal-light;
-      border-color: rgba($color: white, $alpha: 0);
-    }
-  }
-
-  & > .crow-card-fixed__cancle {
-    background-color: #e44747;
-    border-color: rgba($color: #e44747, $alpha: 0);
-    &:hover {
-      background-color: #e80d0d;
-      border-color: rgba($color: #e80d0d, $alpha: 0);
-    }
-    &:focus {
-      box-shadow: 0 0 0 0.2rem rgba(207, 85, 61, .25);
-    }
-  }
 }
 
 .crow-card__btn-edit,

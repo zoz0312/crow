@@ -1,0 +1,15 @@
+.profile-btn {
+  height: 30px !important;
+}
+
+.profile__fixed-button {
+  border-radius: 0 0 20px 20px !important;
+}
+
+.profile-form {
+  margin-bottom: 20px;
+
+  & > .profile-form--input {
+    border-radius: 20px 20px 0 0 !important;
+  }
+}

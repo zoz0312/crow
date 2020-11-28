@@ -2,10 +2,14 @@ import { authService, dbService } from 'firebaseSetup';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 // import { COLLECTION } from '../constants';
+import './Profile.scss';
+import { Form, Button } from 'react-bootstrap';
+import LoadingButton from '../entities/Button/LoadingButton';
 
 const Profile = ({ userObject, refreshUser }) => {
   const history = useHistory();
   const [userName, setUserName] = useState(userObject.displayName);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onLogoutClick = () => {
     authService.signOut();
@@ -32,6 +36,8 @@ const Profile = ({ userObject, refreshUser }) => {
   }
 
   const onSubmit = async (event) => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
     event.preventDefault();
     if (userObject.displayName !== userName) {
       // TODO: user image set
@@ -40,20 +46,33 @@ const Profile = ({ userObject, refreshUser }) => {
       });
       refreshUser();
     }
+    setIsSubmitting(false);
   }
 
   return (
     <>
-      <form onSubmit={onSubmit}>
-        <input
+      <Form
+        onSubmit={onSubmit}
+        className="profile-form">
+        <Form.Control
           type="text"
           placeholder="Display name"
           value={userName}
           onChange={onChange}
+          className="profile-form--input"
+          disabled={isSubmitting}
         />
-        <button>내 정보 업데이트</button>
-      </form>
-      <button onClick={onLogoutClick}>Logout</button>
+        <LoadingButton
+          type="submit"
+          className="fixed-button profile-btn profile__fixed-button"
+          variant=""
+          isLoading={isSubmitting}>내 정보 업데이트</LoadingButton>
+      </Form>
+      <Button
+        type="button"
+        className="cancle-button profile-btn"
+        variant=""
+        onClick={onLogoutClick}>Logout</Button>
     </>
   )
 }

@@ -73,12 +73,13 @@ const Crow = ({ crowObject, isOwner }) => {
             <LoadingButton
               type="submit"
               isLoading={isSubmitting}
-              className="crow-card-fixed__modify"
+              className="fixed-button"
             >수정</LoadingButton>
             <Button
               type="button"
+              variant=""
               onClick={onEditCancle}
-              className="crow-card-fixed__cancle"
+              className="cancle-button"
             >취소</Button>
           </Form>
         </>
