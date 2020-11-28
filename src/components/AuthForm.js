@@ -1,6 +1,6 @@
 import { authService } from 'firebaseSetup';
 import React, { useState, useRef } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { CSSTransition } from 'react-transition-group';
 import './AuthForm.scss';
 import LoadingButton from 'entities/Button/LoadingButton';
