@@ -1,0 +1,28 @@
+$personal-font-color: #414141;
+$personal-think: #69a8db;
+$personal-light: #85c1e6;
+$contain-shadow: 0 2px 2px 2px rgba($color: white, $alpha: .3);
+
+@mixin span-css($colored) {
+  color: $colored;
+}
+
+$btn-motion: .15s ease-in-out;
+$transitioned:
+  background-color $btn-motion,
+  border-color $btn-motion,
+  box-shadow $btn-motion;
+@mixin btn-base-color($colored, $colored-hover) {
+  background-color: $colored;
+  border-color: rgba($color: $colored, $alpha: 0);
+  transition: $transitioned;
+  &:hover {
+    background-color: $colored-hover;
+    border-color: rgba($color: $colored-hover, $alpha: 0);
+    transition: $transitioned;
+  }
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba($colored-hover, .4);
+    transition: $transitioned;
+  }
+}

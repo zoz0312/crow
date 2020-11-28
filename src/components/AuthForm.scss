@@ -21,6 +21,7 @@
   margin-bottom: 0px;
 }
 
+$second-password-transition: opacity 300ms, transform 300ms;
 .second-password-enter {
   opacity: 0;
   transform: scale(0.9);
@@ -28,7 +29,7 @@
 .second-password-enter-active {
   opacity: 1;
   transform: translateX(0);
-  transition: opacity 300ms, transform 300ms;
+  transition: $second-password-transition;
 }
 .second-password-exit {
   opacity: 1;
@@ -36,43 +37,41 @@
 .second-password-exit-active {
   opacity: 0;
   transform: scale(0.9);
-  transition: opacity 300ms, transform 300ms;
+  transition: $second-password-transition;
 }
 
-$error-transition: all 100ms;
 $error__small-size: 1rem;
 $error__big-size: 1.2rem;
+$error-transition: all 100ms;
+@mixin error-alram($sized) {
+  font-size: $sized;
+  height: $sized * 2;
+  line-height: $sized;
+  transition: $error-transition;
+}
 
 .error-alram-enter {
+  height: 0;
   opacity: 0;
   transform: scale(0.9);
-  height: 0;
 }
 .error-alram-enter-active {
   opacity: 1;
   transform: translateX(0);
-  font-size: $error__big-size;
-  height: $error__big-size * 2;
-  line-height: $error__big-size;
-  transition: $error-transition;
+  @include error-alram($error__big-size);
 }
 .error-alram-enter-done {
-  font-size: $error__small-size;
-  height: $error__small-size * 2;
-  line-height: $error__small-size;
-  transition: $error-transition;
+  @include error-alram($error__big-size);
 }
 .error-alram-exit {
   opacity: 1;
-  font-size: $error__small-size;
-  height: $error__small-size * 2;
-  line-height: $error__small-size;
+  @include error-alram($error__small-size);
 }
 .error-alram-exit-active {
-  opacity: 0;
-  transform: scale(0.9);
-  font-size: 0;
   height: 0;
   line-height: 0;
+  font-size: 0;
+  opacity: 0;
+  transform: scale(0.9);
   transition: $error-transition;
 }

@@ -1,7 +1,4 @@
-$personal-font-color: #414141;
-$personal-think: #69a8db;
-$personal-light: #85c1e6;
-$contain-shadow: 0 2px 2px 2px rgba($color: white, $alpha: .3);
+@import '../style/variables.scss';
 
 .crow-card,
 .crow-card-fixed {
@@ -11,7 +8,7 @@ $contain-shadow: 0 2px 2px 2px rgba($color: white, $alpha: .3);
   height: 80px;
   background-color: white;
   padding: .7rem;
-  border: 3px solid #69a8db;
+  border: 3px solid $personal-think;
   border-radius: 30px;
   margin-bottom: 2rem;
   flex-direction: row;
@@ -57,31 +54,12 @@ $contain-shadow: 0 2px 2px 2px rgba($color: white, $alpha: .3);
   border-radius: 30px;
   margin-right: 5px;
   font-size: .8rem;
-  // box-shadow: $contain-shadow;
-  transition: background-color .15s ease-in-out;
-  &:hover {
-    color: white;
-    transition: background-color .15s ease-in-out;
-  }
 }
 
 .crow-card__btn-edit {
-  background-color: $personal-think;
-  border-color: rgba($color: white, $alpha: 0);
-  &:hover {
-    background-color: $personal-light;
-    border-color: rgba($color: white, $alpha: 0);
-  }
+  @include btn-base-color($personal-think, $personal-light);
 }
 
 .crow-card__btn-delete {
-  background-color: #e44747;
-  border-color: rgba($color: #e44747, $alpha: 0);
-  &:hover {
-    border-color: rgba($color: #e80d0d, $alpha: 0);
-    background-color: #e80d0d;
-  }
-  &:focus {
-    box-shadow: 0 0 0 0.2rem rgba(207, 85, 61, .25);
-  }
+  @include btn-base-color(#e44747, #e80d0d);
 }
