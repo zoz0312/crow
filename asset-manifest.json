@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/crow/static/css/main.1613df06.chunk.css",
+    "main.js": "/crow/static/js/main.30c7f3ab.chunk.js",
+    "main.js.map": "/crow/static/js/main.30c7f3ab.chunk.js.map",
+    "runtime-main.js": "/crow/static/js/runtime-main.1241c7b7.js",
+    "runtime-main.js.map": "/crow/static/js/runtime-main.1241c7b7.js.map",
+    "static/js/2.61bc430f.chunk.js": "/crow/static/js/2.61bc430f.chunk.js",
+    "static/js/2.61bc430f.chunk.js.map": "/crow/static/js/2.61bc430f.chunk.js.map",
+    "index.html": "/crow/index.html",
+    "static/css/main.1613df06.chunk.css.map": "/crow/static/css/main.1613df06.chunk.css.map",
+    "static/js/2.61bc430f.chunk.js.LICENSE.txt": "/crow/static/js/2.61bc430f.chunk.js.LICENSE.txt",
+    "static/media/crow.e50c965f.jpg": "/crow/static/media/crow.e50c965f.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1241c7b7.js",
+    "static/js/2.61bc430f.chunk.js",
+    "static/css/main.1613df06.chunk.css",
+    "static/js/main.30c7f3ab.chunk.js"
+  ]
+}
