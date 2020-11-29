@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/crow/static/css/main.1613df06.chunk.css",
-    "main.js": "/crow/static/js/main.30c7f3ab.chunk.js",
-    "main.js.map": "/crow/static/js/main.30c7f3ab.chunk.js.map",
+    "main.js": "/crow/static/js/main.150ce992.chunk.js",
+    "main.js.map": "/crow/static/js/main.150ce992.chunk.js.map",
     "runtime-main.js": "/crow/static/js/runtime-main.1241c7b7.js",
     "runtime-main.js.map": "/crow/static/js/runtime-main.1241c7b7.js.map",
     "static/js/2.61bc430f.chunk.js": "/crow/static/js/2.61bc430f.chunk.js",
@@ -16,6 +16,6 @@
     "static/js/runtime-main.1241c7b7.js",
     "static/js/2.61bc430f.chunk.js",
     "static/css/main.1613df06.chunk.css",
-    "static/js/main.30c7f3ab.chunk.js"
+    "static/js/main.150ce992.chunk.js"
   ]
 }
