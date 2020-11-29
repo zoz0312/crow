@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Auth from 'routes/Auth';
 import Profile from 'routes/Profile';
 import Home from '../routes/Home';
@@ -7,33 +7,28 @@ import Navigation from './Navigation';
 
 const AppRouter = ({ isLoggedIn, userObject, refreshUser }) => {
   return (
-    <Router>
+    <BrowserRouter>
       {isLoggedIn && <Navigation userObject={userObject} />}
       <Switch>
-        {isLoggedIn ?
-          <>
+        {isLoggedIn ? (
+          <div>
             <Route exact path="/">
-              <Home
-                userObject={userObject}
-              />
+              <Home userObject={userObject} />
             </Route>
             <Route exact path="/profile">
-              <Profile
-                userObject={userObject}
-                refreshUser={refreshUser}
-              />
+              <Profile userObject={userObject} refreshUser={refreshUser} />
             </Route>
-            <Redirect from="*" to="/" />
-          </>
-          :<>
+          </div>
+        ):(
+          <>
             <Route exact path="/">
               <Auth />
             </Route>
-            <Redirect from="*" to="/" />
           </>
-        }
+        )}
+        {/* <Redirect from="*" to="/" /> */}
       </Switch>
-    </Router>
+    </BrowserRouter>
   )
 }
 

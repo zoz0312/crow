@@ -8,6 +8,7 @@ import LoadingButton from 'entities/Button/LoadingButton';
 import { Button, Form } from 'react-bootstrap';
 
 import './CrowFactory.scss';
+import { CSSTransition } from 'react-transition-group';
 
 const CrowFactory = ({ userObject }) => {
   const [crow, setCrow] = useState('');
@@ -15,6 +16,10 @@ const CrowFactory = ({ userObject }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const imageFileRef = useRef(null);
+
+  const attachCss = 'attach-img';
+  const attachRef = useRef(null);
+  const timeout = 300;
 
   const onSubmit = async (event) => {
     if (isSubmitting) return;
@@ -80,10 +85,17 @@ const CrowFactory = ({ userObject }) => {
             <FontAwesomeIcon icon={faCrow} />
           </LoadingButton>
         </div>
-        { base64 ? (
-          <>
+        <CSSTransition
+          nodeRef={attachRef}
+          in={Boolean(base64)}
+          timeout={timeout}
+          classNames={attachCss}
+          mountOnEnter
+          unmountOnExit
+        >
+          <div ref={attachRef}>
             <div className="crow-container__image-preview">
-              <img src={base64} width="50px" height="50px" />
+              <img src={base64} width="50px" height="50px" alt="upload image" />
             </div>
             <Button
               type="button"
@@ -92,8 +104,9 @@ const CrowFactory = ({ userObject }) => {
               onClick={onClearFile}
               disabled={isSubmitting}
             >사진지우기</Button>
-          </>
-        ) : (
+          </div>
+        </CSSTransition>
+        { !base64 && (
           <label
             htmlFor="upload_image"
             className="crow-container--label"

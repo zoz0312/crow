@@ -130,7 +130,7 @@ const Crow = ({ crowObject, isOwner }) => {
             }
             <span className="crow-card--text">{crowObject.text}</span>
             { crowObject.imgUrl &&
-              <img src={crowObject.imgUrl} width="50px" height="50px" />
+              <img src={crowObject.imgUrl} width="50px" height="50px" alt="upload profile" />
             }
           </div>
         </div>

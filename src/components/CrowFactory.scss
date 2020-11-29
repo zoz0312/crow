@@ -92,3 +92,24 @@ $image-preview-width: 250px;
 #upload_image {
   display: none;
 }
+
+
+$attach-img-transition: opacity 300ms, transform 300ms;
+.attach-img {
+  &-enter {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  &-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: $attach-img-transition;
+  }
+  &-exit {
+    position: absolute;
+    opacity: 0;
+  }
+  &-exit-active {
+    opacity: 0;
+  }
+}
