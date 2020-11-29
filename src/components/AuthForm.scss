@@ -61,7 +61,7 @@ $error-transition: all 100ms;
   @include error-alram($error__big-size);
 }
 .error-alram-enter-done {
-  @include error-alram($error__big-size);
+  @include error-alram($error__small-size);
 }
 .error-alram-exit {
   opacity: 1;
